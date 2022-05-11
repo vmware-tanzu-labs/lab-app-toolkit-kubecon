@@ -1,0 +1,15 @@
+apiVersion: training.educates.dev/v1beta1
+kind: TrainingPortal
+metadata:
+  name: lab-app-toolkit-kubecon
+spec:
+  portal:
+    registration:
+      type: anonymous
+    updates:
+      workshop: true
+  workshops:
+  - name: lab-app-toolkit-kubecon
+    capacity: 1
+    expires: 30m
+    orphaned: 5m

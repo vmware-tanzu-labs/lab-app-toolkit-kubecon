@@ -1,0 +1,7 @@
+name: App Toolkit Overview
+
+modules:
+    activate:
+    - overview
+    - exercises/01-something
+    - summary

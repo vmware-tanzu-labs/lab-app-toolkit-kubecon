@@ -1,0 +1,10 @@
+modules:
+  overview:
+    name: Workshop Intro
+    exit_sign: Start Workshop
+  exercises/01-something:
+    name: Do Something!
+    exit_sign: Next
+  summary:
+    name: Workshop Summary
+    exit_sign: Finish Workshop

@@ -1,0 +1,123 @@
+apiVersion: training.educates.dev/v1beta1
+kind: Workshop
+metadata:
+  name: lab-app-toolkit-kubecon
+spec:
+  title: End-to-end workflow with Application Toolkit
+  description: Learn how Application Toolkit can help you create and end-to-end workflow
+  workshop:
+    files:
+      - image:
+          url: $(image_repository)/lab-app-toolkit-kubecon-files:latest
+        includePaths:
+          - /workshop/**
+          - /profile
+  session:
+    namespaces:
+      budget: custom
+    applications:
+      terminal:
+        enabled: true
+        layout: split
+      vcluster:
+        enabled: true
+      registry:
+        enabled: true
+      docker:
+        enabled: true
+      git:
+        enabled: true
+      editor:
+        enabled: true
+    objects: []
+#      - apiVersion: data.packaging.carvel.dev/v1alpha1
+#        kind: Package
+#        metadata:
+#          name: app-toolkit.community.tanzu.vmware.com.0.1.0
+#        spec:
+#          refName: app-toolkit.community.tanzu.vmware.com
+#          version: 0.1.0
+#          releasedAt: 2022-02-01T14:53:24Z
+#          licenses:
+#            - "Apache 2.0"
+#          template:
+#            spec:
+#              fetch:
+#                - imgpkgBundle:
+#                    image: projects.registry.vmware.com/tce/app-toolkit@sha256:f9492e408858f54673afe5ad2976ace3f935f17aae1e66f762529f417e27681a
+#              template:
+#                - ytt:
+#                    paths:
+#                      - config/
+#                - kbld:
+#                    paths:
+#                      - "-"
+#                      - .imgpkg/images.yml
+#              deploy:
+#                - kapp: {}
+#          valuesSchema:
+#            openAPIv3:
+#              type: object
+#              additionalProperties: false
+#              properties:
+#                excluded_packages:
+#                  type: array
+#                  default: []
+#                  items:
+#                    type: string
+#                  description:
+#                    "A list of package refs that should be excluded from app-toolkit"
+#                contour:
+#                  type: object
+#                  default: {}
+#                  description: "contour values"
+#                kpack:
+#                  type: object
+#                  default: {}
+#                  description: "kpack values"
+#                knative_serving:
+#                  type: object
+#                  default: {}
+#                  description: "knative-serving values"
+#                cert_manager:
+#                  type: object
+#                  default: {}
+#      - apiVersion: packaging.carvel.dev/v1alpha1
+#        kind: PackageInstall
+#        metadata:
+#          name: app-toolkit
+#          namespace: $(session_namespace)-vc
+#        spec:
+#          packageRef:
+#            refName: app-toolkit.community.tanzu.vmware.com
+#            versionSelection:
+#              constraints: 0.1.0
+#          values:
+#            - secretRef:
+#                name: app-toolkit-values
+#          cluster:
+#            namespace: default
+#            kubeconfigSecretRef:
+#              name: $(vcluster_secret)
+#              key: config
+#          noopDelete: true
+#          syncPeriod: 24h
+#      - apiVersion: v1
+#        kind: Secret
+#        metadata:
+#          name: app-toolkit-values
+#          namespace: $(session_namespace)-vc
+#        stringData:
+#          values.yml: |-
+#            excluded_packages:
+#            - contour.community.tanzu.vmware.com
+#            contour: {}
+#            kpack:
+#              kp_default_repository: $(registry_host)/kp    
+#              kp_default_repository_username: $(registry_username)    
+#              kp_default_repository_password: $(registry_password)
+#            knative_serving:
+#              domain:
+#                type: real
+#                name: 127-0-0-1.sslip.io
+#            cert_manager: {}
