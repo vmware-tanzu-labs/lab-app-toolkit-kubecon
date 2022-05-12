@@ -1,0 +1,19 @@
+excluded_packages:
+  - contour.community.tanzu.vmware.com
+  - kpack-dependencies.community.tanzu.vmware.com
+  - cartographer-catalog.community.tanzu.vmware.com
+
+knative_serving:
+  domain:
+    type: real
+    name: $INGRESS_DOMAIN
+
+kpack:
+  kp_default_repository: $REGISTRY_HOST/kp
+  kp_default_repository_username: $REGISTRY_USERNAME
+  kp_default_repository_password: $REGISTRY_PASSWORD
+
+#cartographer_catalog:
+#  registry:
+#    server: $REGISTRY_HOST
+#    repository: catalog

@@ -11,10 +11,21 @@ spec:
           url: $(image_repository)/lab-app-toolkit-kubecon-files:latest
         includePaths:
           - /workshop/**
-          - /profile
+    packages:
+#      - name: tce
+#        files:
+#          - image:
+#              url: ghcr.io/vmware-tanzu-labs/educates-extension-packages/tce-0.11:sha-5cacee8
+      - name: tce
+        files:
+          - image:
+              url: ghcr.io/vmware-tanzu-labs/educates-extension-packages/tce-0.12:sha-7d28623
   session:
     namespaces:
       budget: custom
+    env:
+      - name: TCE_VERSION
+        value: 0.12.0
     applications:
       terminal:
         enabled: true
@@ -29,95 +40,47 @@ spec:
         enabled: true
       editor:
         enabled: true
-    objects: []
-#      - apiVersion: data.packaging.carvel.dev/v1alpha1
-#        kind: Package
-#        metadata:
-#          name: app-toolkit.community.tanzu.vmware.com.0.1.0
-#        spec:
-#          refName: app-toolkit.community.tanzu.vmware.com
-#          version: 0.1.0
-#          releasedAt: 2022-02-01T14:53:24Z
-#          licenses:
-#            - "Apache 2.0"
-#          template:
-#            spec:
-#              fetch:
-#                - imgpkgBundle:
-#                    image: projects.registry.vmware.com/tce/app-toolkit@sha256:f9492e408858f54673afe5ad2976ace3f935f17aae1e66f762529f417e27681a
-#              template:
-#                - ytt:
-#                    paths:
-#                      - config/
-#                - kbld:
-#                    paths:
-#                      - "-"
-#                      - .imgpkg/images.yml
-#              deploy:
-#                - kapp: {}
-#          valuesSchema:
-#            openAPIv3:
-#              type: object
-#              additionalProperties: false
-#              properties:
-#                excluded_packages:
-#                  type: array
-#                  default: []
-#                  items:
-#                    type: string
-#                  description:
-#                    "A list of package refs that should be excluded from app-toolkit"
-#                contour:
-#                  type: object
-#                  default: {}
-#                  description: "contour values"
-#                kpack:
-#                  type: object
-#                  default: {}
-#                  description: "kpack values"
-#                knative_serving:
-#                  type: object
-#                  default: {}
-#                  description: "knative-serving values"
-#                cert_manager:
-#                  type: object
-#                  default: {}
-#      - apiVersion: packaging.carvel.dev/v1alpha1
-#        kind: PackageInstall
-#        metadata:
-#          name: app-toolkit
-#          namespace: $(session_namespace)-vc
-#        spec:
-#          packageRef:
-#            refName: app-toolkit.community.tanzu.vmware.com
-#            versionSelection:
-#              constraints: 0.1.0
-#          values:
-#            - secretRef:
-#                name: app-toolkit-values
-#          cluster:
-#            namespace: default
-#            kubeconfigSecretRef:
-#              name: $(vcluster_secret)
-#              key: config
-#          noopDelete: true
-#          syncPeriod: 24h
-#      - apiVersion: v1
-#        kind: Secret
-#        metadata:
-#          name: app-toolkit-values
-#          namespace: $(session_namespace)-vc
-#        stringData:
-#          values.yml: |-
-#            excluded_packages:
-#            - contour.community.tanzu.vmware.com
-#            contour: {}
-#            kpack:
-#              kp_default_repository: $(registry_host)/kp    
-#              kp_default_repository_username: $(registry_username)    
-#              kp_default_repository_password: $(registry_password)
-#            knative_serving:
-#              domain:
-#                type: real
-#                name: 127-0-0-1.sslip.io
-#            cert_manager: {}
+    objects:
+      - apiVersion: data.packaging.carvel.dev/v1alpha1
+        kind: Package
+        metadata:
+          name: kapp-controller.community.tanzu.vmware.com.0.35.0
+          namespace: $(session_namespace)-vc
+        spec:
+          refName: kapp-controller.community.tanzu.vmware.com
+          version: 0.35.0
+          releaseNotes: "kapp-controller 0.35.0 https://github.com/vmware-tanzu/carvel-kapp-controller"
+          licenses:
+            - "Apache 2.0"
+          template:
+            spec:
+              fetch:
+                - imgpkgBundle:
+                    image: projects.registry.vmware.com/tce/kapp-controller@sha256:6649d06214b2527d47c9b1d146799841656988c682ae7ec46ec4d0edb37c56fa
+              template:
+                - ytt:
+                    paths:
+                      - config/
+                - kbld:
+                    paths:
+                      - "-"
+                      - .imgpkg/images.yml
+              deploy:
+                - kapp: {}
+      - apiVersion: packaging.carvel.dev/v1alpha1
+        kind: PackageInstall
+        metadata:
+          name: kapp-controller
+          namespace: $(session_namespace)-vc
+        spec:
+          packageRef:
+            refName: kapp-controller.community.tanzu.vmware.com
+            versionSelection:
+              constraints: 0.35.0
+          cluster:
+            namespace: default
+            kubeconfigSecretRef:
+              name: $(vcluster_secret)
+              key: config
+          noopDelete: true
+          syncPeriod: 24h

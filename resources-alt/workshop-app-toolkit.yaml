@@ -7,14 +7,21 @@ spec:
   description: Learn how Application Toolkit can help you create and end-to-end workflow
   workshop:
     files:
-    - image:
-        url: $(image_repository)/lab-app-toolkit-kubecon-files:latest
-      includePaths:
-      - /workshop/**
-      - /profile
+      - image:
+          url: $(image_repository)/lab-app-toolkit-kubecon-files:latest
+        includePaths:
+          - /workshop/**
+    packages:
+      - name: tce
+        files:
+          - image:
+              url: ghcr.io/vmware-tanzu-labs/educates-extension-packages/tce-0.12:sha-7d28623
   session:
     namespaces:
       budget: custom
+    env:
+      - name: TCE_VERSION
+        value: 0.12.0
     applications:
       terminal:
         enabled: true
@@ -30,6 +37,49 @@ spec:
       editor:
         enabled: true
     objects:
+      - apiVersion: data.packaging.carvel.dev/v1alpha1
+        kind: Package
+        metadata:
+          name: kapp-controller.community.tanzu.vmware.com.0.35.0
+          namespace: $(session_namespace)-vc
+        spec:
+          refName: kapp-controller.community.tanzu.vmware.com
+          version: 0.35.0
+          releaseNotes: "kapp-controller 0.35.0 https://github.com/vmware-tanzu/carvel-kapp-controller"
+          licenses:
+            - "Apache 2.0"
+          template:
+            spec:
+              fetch:
+                - imgpkgBundle:
+                    image: projects.registry.vmware.com/tce/kapp-controller@sha256:6649d06214b2527d47c9b1d146799841656988c682ae7ec46ec4d0edb37c56fa
+              template:
+                - ytt:
+                    paths:
+                      - config/
+                - kbld:
+                    paths:
+                      - "-"
+                      - .imgpkg/images.yml
+              deploy:
+                - kapp: {}
+      - apiVersion: packaging.carvel.dev/v1alpha1
+        kind: PackageInstall
+        metadata:
+          name: kapp-controller
+          namespace: $(session_namespace)-vc
+        spec:
+          packageRef:
+            refName: kapp-controller.community.tanzu.vmware.com
+            versionSelection:
+              constraints: 0.35.0
+          cluster:
+            namespace: default
+            kubeconfigSecretRef:
+              name: $(vcluster_secret)
+              key: config
+          noopDelete: true
+          syncPeriod: 24h
     - apiVersion: data.packaging.carvel.dev/v1alpha1
       kind: Package
       metadata:
@@ -55,9 +105,7 @@ spec:
                     - "-"
                     - .imgpkg/images.yml
             deploy:
-              - kapp:
-                  rawOptions:
-                    - "--app-changes-max-to-keep=5"
+              - kapp: {}
         valuesSchema:
           openAPIv3:
             type: object
@@ -134,5 +182,5 @@ spec:
           knative_serving:
             domain:
               type: real
-              name: 127-0-0-1.sslip.io
+              name: $(ingress_domain)
           cert_manager: {}
