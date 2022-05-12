@@ -12,20 +12,20 @@ spec:
         includePaths:
           - /workshop/**
     packages:
-#      - name: tce
-#        files:
-#          - image:
-#              url: ghcr.io/vmware-tanzu-labs/educates-extension-packages/tce-0.11:sha-5cacee8
       - name: tce
         files:
           - image:
-              url: ghcr.io/vmware-tanzu-labs/educates-extension-packages/tce-0.12:sha-7d28623
+              url: ghcr.io/vmware-tanzu-labs/educates-extension-packages/tce-0.11:sha-5cacee8
+#      - name: tce
+#        files:
+#          - image:
+#              url: ghcr.io/vmware-tanzu-labs/educates-extension-packages/tce-0.12:sha-7d28623
   session:
     namespaces:
       budget: custom
     env:
       - name: TCE_VERSION
-        value: 0.12.0
+        value: 0.11.0
     applications:
       terminal:
         enabled: true

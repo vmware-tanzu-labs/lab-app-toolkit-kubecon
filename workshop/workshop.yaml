@@ -3,5 +3,8 @@ name: App Toolkit Overview
 modules:
     activate:
     - overview
-    - exercises/01-something
+    - exercises/00-commands
+    - exercises/01-dev-experience
+    - exercises/02-supply-chain
+    - exercises/03-templates
     - summary

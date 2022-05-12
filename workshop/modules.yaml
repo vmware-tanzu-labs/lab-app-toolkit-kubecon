@@ -2,8 +2,17 @@ modules:
   overview:
     name: Workshop Intro
     exit_sign: Start Workshop
-  exercises/01-something:
-    name: Do Something!
+  exercises/00-something:
+    name: Commands
+    exit_sign: Next
+  exercises/01-dev-experience:
+    name: Developer Experience
+    exit_sign: Next
+  exercises/02-supply-chain:
+    name: Supply Chain
+    exit_sign: Next
+  exercises/03-templates:
+    name: Templates
     exit_sign: Next
   summary:
     name: Workshop Summary
