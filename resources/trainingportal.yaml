@@ -11,5 +11,5 @@ spec:
   workshops:
   - name: lab-app-toolkit-kubecon
     capacity: 1
-    expires: 30m
+    expires: 60m
     orphaned: 5m

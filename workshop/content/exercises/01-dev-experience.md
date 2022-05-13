@@ -1,6 +1,6 @@
-The workshop contains a git repository with a simple "hello-world" application written in Go.
+As a developer, you want to submit your workload information (git repo and branch, primarily) and have the application running on the platform.
 
-The platform is ready to receive web applications and shepher them through the following workflow:
+Luckily, Application Toolkit delivers what you need. The platform is ready to receive web applications and shepherd them through the following workflow:
 1. Obtain the source code from a git repository
 2. Build a container image and publish it to a registry
 3. Deploy the application
