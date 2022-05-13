@@ -5,10 +5,14 @@ metadata:
 spec:
   title: End-to-end workflow with Application Toolkit
   description: Learn how Application Toolkit can help you create and end-to-end workflow
+  url: https://github.com/vmware-tanzu-labs/lab-app-toolkit-kubecon
   workshop:
     files:
       - image:
           url: $(image_repository)/lab-app-toolkit-kubecon-files:latest
+#      - git:
+#          ref: origin/main
+#          url: https://github.com/vmware-tanzu-labs/lab-app-toolkit-kubecon
         includePaths:
           - /workshop/**
           - /exercises/**

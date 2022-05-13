@@ -22,6 +22,8 @@ tanzu secret registry add registry-credentials --server $REGISTRY_HOST --usernam
 APP_TOOLKIT_VERSION=$(tanzu package available list app-toolkit.community.tanzu.vmware.com -o json | jq -r ".[].version" | sort -t "." -k1,1n -k2,2n -k3,3n | tail -n 1)
 tanzu package install app-toolkit --package-name app-toolkit.community.tanzu.vmware.com --version $APP_TOOLKIT_VERSION -f /opt/workshop/setup.conf/app-toolkit-values.yaml --namespace tanzu-package-repo-global
 
+kp secret create git-credentials --git-url $GIT_PROTOCOL://$GIT_HOST --git-user $GIT_USERNAME || true
+
 # Run scripts in the background (so the workshop UI can load now)
 #/opt/workshop/scripts/kpack-create-builder.sh &
 #/opt/workshop/scripts/carto-create-supply-chain.sh &
