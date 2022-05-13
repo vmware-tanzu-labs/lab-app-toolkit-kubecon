@@ -10,6 +10,13 @@ if [[ $(which kp) == "" ]]; then
   curl --fail -L -o /home/eduk8s/bin/kp https://github.com/vmware-tanzu/kpack-cli/releases/download/v$KP_VERSION/kp-linux-$KP_VERSION && chmod 755 /home/eduk8s/bin/kp
 fi
 
+curl -L https://github.com/vmware-tanzu/community-edition/releases/download/v${TCE_VERSION}/tce-linux-amd64-v${TCE_VERSION}.tar.gz -o tce-linux-amd64-v${TCE_VERSION}.tar.gz
+tar -xf tce-linux-amd64-v${TCE_VERSION}.tar.gz
+mkdir bin
+cd tce-linux-amd64-v${TCE_VERSION}
+cp tanzu /home/eduk8s/bin/tanzu
+./install.sh
+
 # Clone repositories
 /opt/workshop/scripts/git-clone-repositories.sh &
 
