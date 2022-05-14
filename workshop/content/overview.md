@@ -19,7 +19,7 @@ Application Toolkit simplifies configuration and installation of a developer-rea
 
 **Where Can I Use Application Toolkit?**
 
-Application Toolkit can be installed on any Kubernetes cluster, on your local machine or on cloud infrastructure.
+Application Toolkit can be installed on any Kubernetes cluster, whether on your local machine or on cloud infrastructure.
 
 With VMware Tanzu® Community Edition, you can also provision a local Kubernetes cluster and install Application Toolkit in a single command!
 

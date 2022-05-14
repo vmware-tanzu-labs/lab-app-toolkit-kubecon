@@ -1,5 +1,5 @@
 With Application Toolkit, your Kubernetes platform is ready to receive web applications and shepherd them through the following workflow:
-1. Obtain the source code from a git repository
+1. Obtain source code from a git repository
 2. Build a container image and publish it to a registry
 3. Deploy the application
 
@@ -29,11 +29,32 @@ Run the following command to check the status of the workload.
 command: tanzu apps workload get my-first-workload
 ```
 
+You will likely see that the status is pending as it is `waiting to read value [.status.latestImage] from resource [image.kpack.io/my-first-workload]`.
+
+This simply means that the workload is still being processed.
+It takes a few moments to build the container image.
+
 **Stream Logs**
 
-Check the logs for more information.
+Tail the logs for more information.
 ```terminal:execute
 command: tanzu apps workload tail my-first-workload
+```
+
+Wait until you see the following output indicating completion.
+If necessary, hit Ctrl+C to quit tailing the logs.
+```execute
+<ctrl+c>
+```
+
+Alternatively, you can watch the build pod.
+```terminal:execute
+command: kubectl get pod my-first-workload-build-1-build-pod -w
+```
+
+hit Ctrl+C to quit watching the pod.
+```execute
+<ctrl+c>
 ```
 
 **Test Application**
@@ -48,6 +69,13 @@ To test the application, click on the URL in the output of the previous command,
 ```terminal:execute
 command: curl http://my-first-workload.{{ ingress_domain }}
 ```
+
+**Ongoing Workflow**
+
+Now that the platform is aware of your workload, anytime you do a git commit on the source code repository, the workflow will build and deploy a new image.
+
+**Easy Peasy**
+That's it! With a simple command to install Application Toolkit, and another to deploy a Workload, you've got a process in place to automatically and continuously build and deploy your application on Kubernetes.
 
 **Behind the Scenes**
 
