@@ -19,15 +19,15 @@ Notice that:
 
 **Step 1 in the Workflow: ClusterSourceTemplate**
 ```terminal:execute
-command: kubectl get clustersourcetemplate git-repository
+command: kubectl get clustersourcetemplate git-repository -o yaml
 ```
 
 **Step 2 in the Workflow: ClusterImageTemplate**
 ```terminal:execute
-command: kubectl get clusterimagetemplate image
+command: kubectl get clusterimagetemplate image -o yaml
 ```
 
 **Step 3 in the Workflow: ClusterTemplate**
 ```terminal:execute
-command: kubectl get clustertemplate app
+command: kubectl get clustertemplate app -o yaml
 ```
