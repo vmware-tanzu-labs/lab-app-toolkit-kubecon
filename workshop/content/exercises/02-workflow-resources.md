@@ -2,26 +2,26 @@ Let's start by walking through the resources that handled the workflow from begi
 
 **Step 1: Obtain the source code from a git repository**
 
-To obtain source code, the workflow created a FluxCD GitRepository resource for your workload.
+To obtain source code, the workflow created a FluxCD _GitRepository_ resource for your workload.
 
-For convenience, export the GitRepository resource's details to a file.
+For convenience, export the resource details to a file.
 ```terminal:execute
 command: kubectl get GitRepository my-first-workload -o yaml > ~/exercises/my-first-workload-step-1-source.yaml
 ```
 
 Open the file in the editor and look through the details.
-Notice that several fields were dynamically populated with information from your workload (name, url, branch).
-Notice also that this resource configured FluxCD to check the repo every minute for new commits.
 ```editor:open-file
 file: ~/exercises/my-first-workload-step-1-source.yaml
 ```
+Notice that several fields were dynamically populated with information from your workload (name, url, branch).
+Notice also that this resource configured FluxCD to check the repo every minute for new commits.
 
 Next, take a look at the status.
 ```editor:select-matching-text
 file: ~/exercises/my-first-workload-step-1-source.yaml
 text: "status: "
 before: 0
-after: 100
+after: 1
 ```
 
 Notice the conditions state `type: Ready` and `status: "True"`, indicating the resource was successful in obtaining a new git commit.
@@ -43,20 +43,21 @@ To build the container image, the workflow created a kpack Image resource for yo
 >
 > kpack utilizes Cloud Native Buildpacks (CNBs) to turn application source code into OCI images. CNBs provide a structured way to build images without requiring custom scripts, such as Dockerfiles. With Cloud Native Buildpacks, you can ensure that all applications across your organization are being built in a consistent, secure, auditable manner, including deep language-specific expertise. kpack adds the ability to maintain images up-to-date at scale, rebuilding or rebasing images as needed automatically.
 
-For convenience, export the Image resource's details to a file.
+For convenience, export resource details to a file.
 ```terminal:execute
 command: kubectl get imgs my-first-workload -o yaml > ~/exercises/my-first-workload-step-2-image.yaml
 ```
 
 Open the file in the editor and look through the details.
-Notice, again, that several fields were dynamically populated with information from your workload (name, tag).
 ```editor:open-file
-file: ~/exercises/my-first-workload-step-1-source.yaml
+file: ~/exercises/my-first-workload-step-2-image.yaml
 ```
+
+Notice, again, that several fields were dynamically populated with information from your workload (name, tag).
 
 Notice that the value of `.status.artifact.url` from the GitRepository resource was automatically provided as the source url for the Image resource.
 ```editor:select-matching-text
-file: ~/exercises/my-first-workload-step-1-source.yaml
+file: ~/exercises/my-first-workload-step-2-image.yaml
 text: "source: "
 before: 0
 after: 0
@@ -64,7 +65,7 @@ after: 0
 
 Next, take a look at the status.
 ```editor:select-matching-text
-file: ~/exercises/my-first-workload-step-1-source.yaml
+file: ~/exercises/my-first-workload-step-2-image.yaml
 text: "status: "
 before: 0
 after: 100
@@ -74,7 +75,7 @@ Again, notice the conditions state `type: Ready` and `status: "True"`, indicatin
 
 Notice also that the field `.status.latestImage` contains the tag of the new image.
 ```editor:select-matching-text
-file: ~/exercises/my-first-workload-step-1-source.yaml
+file: ~/exercises/my-first-workload-step-2-image.yaml
 text: "latestImage"
 before: 0
 after: 0
@@ -91,7 +92,7 @@ Finally, to deploy the container image, the workflow created a Knative Serving S
 > With relatively simple configuration, Knative Serving provides a sophisticated deployment of your application, including the ability to auto-scale, scale to zero instances, weight traffic between revisions, roll back to previous revisions, and easily expose the application.
 Compared to configuring a basic Deployment, Service, and Ingress, Knative Serving provides much richer functionality with simpler configuration.
 
-For convenience, export the Service resource's details to a file.
+For convenience, export the resource details to a file.
 ```terminal:execute
 command: kubectl get kservice my-first-workload -o yaml > ~/exercises/my-first-workload-step-3-app.yaml
 ```
