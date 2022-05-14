@@ -37,7 +37,7 @@ This url contains the code we want to build and deploy.
 
 **Step 2: Build a container image and publish it to a registry**
 
-To build the container image, the workflow created a kpack Image resource for your workload.
+To build the container image, the workflow created a kpack _Image_ resource for your workload.
 
 > Side bar: Why kpack?
 >
@@ -60,13 +60,13 @@ Notice that the value of `.status.artifact.url` from the GitRepository resource 
 file: ~/exercises/my-first-workload-step-2-image.yaml
 text: "source: "
 before: 0
-after: 0
+after: 2
 ```
 
 Next, take a look at the status.
 ```editor:select-matching-text
 file: ~/exercises/my-first-workload-step-2-image.yaml
-text: "status: "
+text: "status:"
 before: 0
 after: 100
 ```
@@ -85,7 +85,7 @@ This latestImage field contains the image we want to deploy.
 
 **Step 3: Deploy the application**
 
-Finally, to deploy the container image, the workflow created a Knative Serving Service resource for your workload.
+Finally, to deploy the container image, the workflow created a Knative Serving _Service_ resource for your workload.
 
 > Side bar: Why Knative Serving?
 > 
