@@ -4,6 +4,7 @@ modules:
     activate:
     - overview
     - exercises/01-dev-experience
-    - exercises/02-supply-chain
+    - exercises/02-workflow-resources
     - exercises/03-templates
+    - exercises/04-supply-chain
     - summary

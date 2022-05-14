@@ -13,7 +13,7 @@ Use the tanzu CLI to deploy a workload to the platform.
 ```terminal:execute
 command: |-
     tanzu apps workload create my-first-workload \
-          --git-repo {{ git_protocol }}://{{ git_host }}/hello-go.git \
+          --git-repo https://github.com/ciberkleid/hello-go.git \
           --git-branch main \
           --label app.kubernetes.io/part-of=my-first-workload \
           --type web \

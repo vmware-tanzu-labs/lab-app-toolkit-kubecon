@@ -14,4 +14,4 @@ kpack:
 cartographer_catalog:
   registry:
     server: $REGISTRY_HOST
-    repository: catalog
+    repository: apps

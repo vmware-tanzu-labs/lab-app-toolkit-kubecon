@@ -5,11 +5,14 @@ modules:
   exercises/01-dev-experience:
     name: Developer Experience
     exit_sign: Next
-  exercises/02-supply-chain:
-    name: Supply Chain
+  exercises/02-workflow-resources:
+    name: Workflow Resources
     exit_sign: Next
   exercises/03-templates:
     name: Templates
+    exit_sign: Next
+  exercises/04-supply-chain:
+    name: Supply Chain
     exit_sign: Next
   summary:
     name: Workshop Summary
