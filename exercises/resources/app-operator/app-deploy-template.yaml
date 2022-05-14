@@ -37,7 +37,7 @@ spec:
     metadata:
       name: $(workload.metadata.name)$
     spec:
-      serviceAccountName: example-supply-chain-sa
+      serviceAccountName: default
       fetch:
         - inline:
             paths:
@@ -75,7 +75,7 @@ spec:
                       annotations:
                         autoscaling.knative.dev/minScale: "1"
                     spec:
-                      serviceAccountName: example-supply-chain-sa
+                      serviceAccountName: default
                       containers:
                         - name: workload
                           image: $(images.image.image)$

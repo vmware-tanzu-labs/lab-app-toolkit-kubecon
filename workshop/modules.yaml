@@ -2,9 +2,6 @@ modules:
   overview:
     name: Workshop Intro
     exit_sign: Start Workshop
-  exercises/00-something:
-    name: Commands
-    exit_sign: Next
   exercises/01-dev-experience:
     name: Developer Experience
     exit_sign: Next

@@ -2,24 +2,28 @@ Welcome to the **Application Toolkit** workshop!
 
 In this workshop, you will use Application Toolkit—VMware Tanzu® Community Edition's newest package—to move a workload from source code to deployment.
 
-Application Toolkit enables developers to get a complete, ready-to-use application platform up and running in minutes. You can immediately deploy web applications without requiring knowledge of Kubernetes or other underlying platform technologies.
+**What is Application Toolkit?**
 
-You can also add your own supply chains to support different types of applications and additional use cases such as testing, scanning, etc.
+Application Toolkit is a "meta-package" of technologies that enables developers to get a complete, ready-to-use application platform up and running in minutes. You can immediately deploy web applications without requiring knowledge of Kubernetes or other underlying platform technologies.
 
-Application Toolkit simplifies configuration and installation of the application platform by neatly bundling a full set of technologies into one "meta-package"
-comprising:
+Application Toolkit simplifies configuration and installation of a developer-ready application platform by neatly bundling a full set of technologies, including:
 
 - Flux CD Source Controller — for obtaining soure code                        
 - kpack                     — for building container images                   
+- kpack-dependencies        — default builder
 - Knative Serving           — for running applications                        
-- Cartographer              — for creating software supply chains             
-- Cartographer Catalog      — with example software supply chain for web apps 
+- Cartographer              — for creating software supply chains
+- Cartographer Catalog      — example software supply chain for web apps
 - Cert Manager              — for managing certificates                       
-- Contour                   — to enable ingress to applications               
+- Contour                   — to enable ingress to applications
 
+**Where Can I Use Application Toolkit?**
 
+Application Toolkit can be installed on any Kubernetes cluster, on your local machine or on cloud infrastructure.
 
-Application Toolkit can be used to create a developer-ready Kubernetes cluster on your local machine in one command, or to enhance an existing Kubernetes cluster.
+With VMware Tanzu® Community Edition, you can also provision a local Kubernetes cluster and install Application Toolkit in a single command!
+
+**How Does Application Toolkit Work?**
 
 For this workshop, Application Toolkit is installed and ready for you to deploy an application.
 
