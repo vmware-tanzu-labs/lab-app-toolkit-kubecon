@@ -5,11 +5,11 @@ With Application Toolkit, your Kubernetes platform is ready to receive web appli
 
 **Create Workload**
 
-Application Toolkit provides an abstraction layer to define application workloads and maintain a clean separation of responsibilities between developers and operators.
+Application Toolkit provides an abstraction layer to define application workloads and maintain a clean separation of concerns between developers and operators.
 
 As a developer, you provide the values unique to your application, such as the git repo and branch.
 
-Use the tanzu CLI to deploy a workload to the platform.
+Use the tanzu CLI to deploy a workload to the platform. The `--tail` option will stream logs to the terminal window.
 ```terminal:execute
 command: |-
     tanzu apps workload create my-first-workload \
@@ -17,16 +17,17 @@ command: |-
           --git-branch main \
           --label app.kubernetes.io/part-of=my-first-workload \
           --type web \
-          --yes
+          --yes --tail
 ```
 
 **Track Progress**
 
 Application Toolkit includes a basic workflow for web applications that will immediately begin moving the workload from source to runtime.
 
-Run the following command to check the status of the workload.
+Click the following action to check the status of the workload in the second terminal window.
 ```terminal:execute
 command: tanzu apps workload get my-first-workload
+session: 2
 ```
 
 You will likely see that the status is pending as it is `waiting to read value [.status.latestImage] from resource [image.kpack.io/my-first-workload]`.
@@ -34,35 +35,21 @@ You will likely see that the status is pending as it is `waiting to read value [
 This simply means that the workload is still being processed.
 It takes a few moments to build the container image.
 
-**Stream Logs**
+In the meantime, you should see logging for the container build streaming in the first terminal window.
 
-Tail the logs for more information.
-```terminal:execute
-command: tanzu apps workload tail my-first-workload
+Wait until you see the following lines the the first terminal window:
+```shell
+my-first-workload-build-1-build-pod[completion] Build successful
+Workload "my-first-workload" is ready
 ```
 
-Wait until you see the following output indicating completion.
-If necessary, hit Ctrl+C to quit tailing the logs.
-```execute
-<ctrl+c>
-```
-
-Alternatively, you can watch the build pod.
-```terminal:execute
-command: kubectl get pod my-first-workload-build-1-build-pod -w
-```
-
-Hit Ctrl+C to quit watching the pod.
-```execute
-<ctrl+c>
-```
-
-**Test Application**
-
-Get the workload status again to see the URL of the deployed application.
+Re-run the "get" command.
+This time the status should be "Ready/True" and you should see a URL in the result.
 ```terminal:execute
 command: tanzu apps workload get my-first-workload
 ```
+
+**Test Application**
 
 To test the application, click on the URL in the output of the previous command, or execute the following command.
 
@@ -79,4 +66,4 @@ That's it! With a simple command to install Application Toolkit, and another to 
 
 **Behind the Scenes**
 
-Let's take a look behind the scenes to see how Application Toolkit made this possible.
+LNext, let's take a look behind the scenes to see how Application Toolkit made this possible.
