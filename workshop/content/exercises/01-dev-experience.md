@@ -52,7 +52,7 @@ Alternatively, you can watch the build pod.
 command: kubectl get pod my-first-workload-build-1-build-pod -w
 ```
 
-hit Ctrl+C to quit watching the pod.
+Hit Ctrl+C to quit watching the pod.
 ```execute
 <ctrl+c>
 ```

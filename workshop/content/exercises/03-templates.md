@@ -1,6 +1,6 @@
 How were these resources automatically configured and created?
 
-Application Toolkit includes **Cartographer**, a Supply Chain Choreographer that allows you to create templates for stamping out arbitrary kinds of resources (for example, FluxCD GitRepository, kpack Image, and Knative Serving Service) and for passing outputs of one instance as inputs to another.
+Application Toolkit includes **Cartographer**, a Supply Chain Choreographer that allows you to create templates for stamping out instances of arbitrary kinds of resources (for example, FluxCD GitRepository, kpack Image, and Knative Serving Service) and for passing outputs of one instance as inputs to another.
 
 In addition, Application Toolkit includes pre-configured templates for GitRepository, Image, and Service, so you can get started deploying applications right away.
 

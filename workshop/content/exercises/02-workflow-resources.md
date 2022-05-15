@@ -10,11 +10,12 @@ command: kubectl get GitRepository my-first-workload -o yaml > ~/exercises/my-fi
 ```
 
 Open the file in the editor and look through the details.
+You will see it includes the resource configuration as well as its status.
 ```editor:open-file
 file: ~/exercises/my-first-workload-step-1-source.yaml
 ```
-Notice that several fields were dynamically populated with information from your workload (name, url, branch).
-Notice also that this resource configured FluxCD to check the repo every minute for new commits.
+Notice that several fields—name, url, and branch—were dynamically populated with information from your workload.
+Notice also that this resource is configured to check the source code repository every minute for new commits.
 
 Next, take a look at the status.
 ```editor:select-matching-text
@@ -41,9 +42,9 @@ To build the container image, the workflow created a kpack _Image_ resource for 
 
 > Side bar: Why kpack?
 >
-> kpack utilizes Cloud Native Buildpacks (CNBs) to turn application source code into OCI images. CNBs provide a structured way to build images without requiring custom scripts, such as Dockerfiles. With Cloud Native Buildpacks, you can ensure that all applications across your organization are being built in a consistent, secure, auditable manner, including deep language-specific expertise. kpack adds the ability to maintain images up-to-date at scale, rebuilding or rebasing images as needed automatically.
+> kpack utilizes Cloud Native Buildpacks (CNBs) to turn application source code into OCI images. CNBs provide a structured way to build images without requiring custom scripts, such as Dockerfiles. With Cloud Native Buildpacks, you can ensure that all applications across your organization are being built in a consistent, secure, auditable manner, including deep language-specific expertise. kpack adds the ability to maintain images up-to-date at scale, automatically rebuilding or rebasing images as needed.
 
-For convenience, export resource details to a file.
+For convenience, export the resource details to a file.
 ```terminal:execute
 command: kubectl get imgs my-first-workload -o yaml > ~/exercises/my-first-workload-step-2-image.yaml
 ```
@@ -53,7 +54,7 @@ Open the file in the editor and look through the details.
 file: ~/exercises/my-first-workload-step-2-image.yaml
 ```
 
-Notice, again, that several fields were dynamically populated with information from your workload (name, tag).
+Notice, again, that a couple of fields—name and tag—were dynamically populated with information from your workload.
 
 Notice that the value of `.status.artifact.url` from the GitRepository resource was automatically provided as the source url for the Image resource.
 ```editor:select-matching-text
@@ -71,7 +72,7 @@ before: 0
 after: 100
 ```
 
-Again, notice the conditions state `type: Ready` and `status: "True"`, indicating the resource was successful in building a new image.
+The conditions should state `type: Ready` and `status: "True"`, indicating the resource was successful in building a new image.
 
 Notice also that the field `.status.latestImage` contains the tag of the new image.
 ```editor:select-matching-text
@@ -102,10 +103,20 @@ Open the file in the editor and look through the details.
 file: ~/exercises/my-first-workload-step-3-app.yaml
 ```
 
-Notice that the value of `.status.latestImagel` from the Image resource was automatically provided as the source image for the Service resource.
+Notice that the value of `.status.latestImage` from the Image resource was automatically provided as the source image for the Service resource.
 ```editor:select-matching-text
 file: ~/exercises/my-first-workload-step-3-app.yaml
 text: "- image: "
 before: 0
 after: 0
 ```
+
+**Perpetual cycle**
+
+These three resources will continue to exist in the Kubernetes cluster after this version of the application is deployed.
+Anytime a developer commits new code, the change will be automatically detected and a new image will be built and deployed.
+
+However... there must be another actor in actor at play here. Who created these three resources, and who is passing the outputs of one resource as input to the next?
+
+That's where Cartographer comes in...
+Continue to the next step to learn more.
