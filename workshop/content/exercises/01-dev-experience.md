@@ -66,4 +66,4 @@ That's it! With a simple command to install Application Toolkit, and another to 
 
 **Behind the Scenes**
 
-LNext, let's take a look behind the scenes to see how Application Toolkit made this possible.
+Next, let's take a look behind the scenes to see how Application Toolkit made this possible.
