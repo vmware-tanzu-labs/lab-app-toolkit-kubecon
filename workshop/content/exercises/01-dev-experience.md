@@ -50,11 +50,13 @@ command: tanzu apps workload get app-{{session_namespace}}
 
 **Test Application**
 
-To test the application, click on the URL in the output of the previous command, or execute the following command.
+Click on the URL in the output of the previous command to open the application in a separate browser tab, or execute the following command to test the application in the terminal window.
 
 ```terminal:execute
 command: curl http://app-{{session_namespace}}.default.{{ ingress_domain }}
 ```
+
+You should get a successful response back from the application.
 
 **Ongoing Workflow**
 
