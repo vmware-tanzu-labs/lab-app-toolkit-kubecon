@@ -13,7 +13,7 @@ Open the file in the editor and look through the details.
 You will see it includes the resource configuration as well as its status.
 ```editor:select-matching-text
 file: ~/exercises/my-first-workload-step-1-source.yaml
-text: "apiVersion(.*)hello-go\.git"
+text: apiVersion(.*)hello-go\.git
 isRegex: true
 ```
 
