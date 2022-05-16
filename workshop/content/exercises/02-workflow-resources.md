@@ -23,7 +23,7 @@ Notice also that this resource is configured to check the source code repository
 Next, take a look at the status.
 ```editor:select-matching-text
 file: ~/exercises/my-first-workload-step-1-source.yaml
-text: "status: "
+text: "status:"
 before: 0
 after: 100
 ```
@@ -65,7 +65,7 @@ Notice, again, that a couple of fields—name and tag—were dynamically populat
 Notice that the value of `.status.artifact.url` from the GitRepository resource was automatically provided as the source url for the Image resource.
 ```editor:select-matching-text
 file: ~/exercises/my-first-workload-step-2-image.yaml
-text: "source: "
+text: "source:"
 before: 0
 after: 2
 ```
@@ -101,7 +101,7 @@ Compared to configuring a basic Deployment, Service, and Ingress, Knative Servin
 
 For convenience, export the resource configuration and status details to a file.
 ```terminal:execute
-command: kubectl get imgs app-{{session_namespace}} -o yaml > ~/exercises/my-first-workload-step-3-app.yaml
+command: kubectl get kservice app-{{session_namespace}} -o yaml > ~/exercises/my-first-workload-step-3-app.yaml
 ```
 
 Open the file in the editor and look through the configuration portion.

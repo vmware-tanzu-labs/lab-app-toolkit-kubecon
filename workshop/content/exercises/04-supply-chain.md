@@ -15,7 +15,7 @@ Notice that this supply chain is intended for web applications.
 It contains a selector whose value matches the `--type: web` field in the workload you created at the beginning of this workshop.
 This value is used to determine which supply chain will apply to a given workload.
 ```editor:select-matching-text
-file: ~/exercises/my-first-workload-step-2-image.yaml
+file: ~/exercises/supply-chain.yaml
 text: "selector:"
 before: 0
 after: 1
@@ -24,7 +24,7 @@ after: 1
 Next, notice the list of resources.
 This list specifies which templates to use, and the order in which they should be applied.
 ```editor:select-matching-text
-file: ~/exercises/my-first-workload-step-2-image.yaml
+file: ~/exercises/supply-chain.yaml
 text: "resources:"
 before: 0
 after: 100
@@ -33,7 +33,7 @@ after: 100
 Finally, notice that the second and third resources (for kpack and Knative Serving, respectively) contain input mapping.
 For example, the input to the ClusterImageTemplate (kpack Image) comes from the source-provider declared just above it.
 ```editor:select-matching-text
-file: ~/exercises/my-first-workload-step-2-image.yaml
+file: ~/exercises/supply-chain.yaml
 text: "  sources:"
 before: 0
 after: 2
