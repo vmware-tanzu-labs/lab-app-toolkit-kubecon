@@ -11,11 +11,12 @@ command: kubectl get GitRepository my-first-workload -o yaml > ~/exercises/my-fi
 
 Open the file in the editor and look through the details.
 You will see it includes the resource configuration as well as its status.
-```editor:select-matching-text
+``````editor:select-matching-text
 file: ~/exercises/my-first-workload-step-1-source.yaml
 text: "apiVersion(.*)hello-go\.git"
 isRegex: true
 ```
+
 Notice that several fields—name, url, and branch—were dynamically populated with information from your workload.
 Notice also that this resource is configured to check the source code repository every minute for new commits.
 
