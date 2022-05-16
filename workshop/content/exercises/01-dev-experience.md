@@ -30,21 +30,20 @@ command: tanzu apps workload get my-first-workload
 session: 2
 ```
 
-You will likely see that the status is pending as it is `waiting to read value [.status.latestImage] from resource [image.kpack.io/my-first-workload]`.
+You will likely see `type: Ready, status: Unknown` and that it is `waiting to read value [.status.latestImage] from resource [image.kpack.io/my-first-workload]`.
 
 This simply means that the workload is still being processed.
 It takes a few moments to build the container image.
 
-In the meantime, you should see logging for the container build streaming in the first terminal window.
-
-Wait until you see the following lines the the first terminal window:
+In the meantime, in the first terminal window, you should see logging for the container build process.
+Wait until you see the following log entries:
 ```shell
 my-first-workload-build-1-build-pod[completion] Build successful
 Workload "my-first-workload" is ready
 ```
 
 Re-run the "get" command.
-This time the status should be "Ready/True" and you should see a URL in the result.
+This time the status should be `type: eady, status: "True"` and you should see a URL for the application in the result.
 ```terminal:execute
 command: tanzu apps workload get my-first-workload
 ```

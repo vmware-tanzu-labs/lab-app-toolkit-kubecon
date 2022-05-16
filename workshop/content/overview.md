@@ -25,4 +25,4 @@ With VMware Tanzu® Community Edition, you can also provision a local Kubernetes
 
 **How Does Application Toolkit Work?**
 
-Start the workshop to deploy an application and explore behind-the-scenes to understand how it moves from source to deployment!
+Start the workshop to deploy an application and explore behind-the-scenes to understand how the workload moves from source code to deployment!
