@@ -15,7 +15,7 @@ fi
 # set it here if that wasn't installed.
 
 if [[ $(which tanzu) == "" ]]; then
-  TCE_VERSION=0.12
+  TCE_VERSION=0.12.0
   curl -L https://github.com/vmware-tanzu/community-edition/releases/download/v${TCE_VERSION}/tce-linux-amd64-v${TCE_VERSION}.tar.gz -o tce-linux-amd64-v${TCE_VERSION}.tar.gz
   tar -xf tce-linux-amd64-v${TCE_VERSION}.tar.gz
   mkdir -p /home/eduk8s/bin
