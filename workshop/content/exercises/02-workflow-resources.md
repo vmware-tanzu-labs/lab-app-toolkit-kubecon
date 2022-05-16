@@ -6,7 +6,7 @@ To obtain source code, the workflow created a FluxCD _GitRepository_ resource fo
 
 For convenience, export the resource configuration and status details to a file.
 ```terminal:execute
-command: kubectl get GitRepository my-first-workload -o yaml > ~/exercises/my-first-workload-step-1-source.yaml
+command: kubectl get GitRepository app-{{session_namespace}} -o yaml > ~/exercises/my-first-workload-step-1-source.yaml
 ```
 
 Open the file in the editor and look through the configuration portion.
@@ -49,7 +49,7 @@ To build the container image, the workflow created a kpack _Image_ resource for 
 
 For convenience, export the resource configuration and status details to a file.
 ```terminal:execute
-command: kubectl get imgs my-first-workload -o yaml > ~/exercises/my-first-workload-step-2-image.yaml
+command: kubectl get imgs app-{{session_namespace}} -o yaml > ~/exercises/my-first-workload-step-2-image.yaml
 ```
 
 Open the file in the editor and look through the configuration portion.
@@ -101,7 +101,7 @@ Compared to configuring a basic Deployment, Service, and Ingress, Knative Servin
 
 For convenience, export the resource configuration and status details to a file.
 ```terminal:execute
-command: kubectl get imgs my-first-workload -o yaml > ~/exercises/my-first-workload-step-3-app.yaml
+command: kubectl get imgs app-{{session_namespace}} -o yaml > ~/exercises/my-first-workload-step-3-app.yaml
 ```
 
 Open the file in the editor and look through the configuration portion.
