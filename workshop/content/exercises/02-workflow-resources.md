@@ -4,13 +4,12 @@ Let's start by walking through the resources that handled the workflow from begi
 
 To obtain source code, the workflow created a FluxCD _GitRepository_ resource for your workload.
 
-For convenience, export the resource details to a file.
+For convenience, export the resource configuration and status details to a file.
 ```terminal:execute
 command: kubectl get GitRepository my-first-workload -o yaml > ~/exercises/my-first-workload-step-1-source.yaml
 ```
 
-Open the file in the editor and look through the details.
-You will see it includes the resource configuration as well as its status.
+Open the file in the editor and look through the configuration portion.
 ```editor:select-matching-text
 file: ~/exercises/my-first-workload-step-1-source.yaml
 text: "apiVersion: "
@@ -48,14 +47,17 @@ To build the container image, the workflow created a kpack _Image_ resource for 
 >
 > kpack utilizes Cloud Native Buildpacks (CNBs) to turn application source code into OCI images. CNBs provide a structured way to build images without requiring custom scripts, such as Dockerfiles. With Cloud Native Buildpacks, you can ensure that all applications across your organization are being built in a consistent, secure, auditable manner, including deep language-specific expertise. kpack adds the ability to maintain images up-to-date at scale, automatically rebuilding or rebasing images as needed.
 
-For convenience, export the resource details to a file.
+For convenience, export the resource configuration and status details to a file.
 ```terminal:execute
 command: kubectl get imgs my-first-workload -o yaml > ~/exercises/my-first-workload-step-2-image.yaml
 ```
 
-Open the file in the editor and look through the details.
+Open the file in the editor and look through the configuration portion.
 ```editor:open-file
 file: ~/exercises/my-first-workload-step-2-image.yaml
+text: "apiVersion: "
+before: 0
+after: 45
 ```
 
 Notice, again, that a couple of fields—name and tag—were dynamically populated with information from your workload.
@@ -97,17 +99,20 @@ Finally, to deploy the container image, the workflow created a Knative Serving _
 > With relatively simple configuration, Knative Serving provides a sophisticated deployment of your application, including the ability to auto-scale, scale to zero instances, weight traffic between revisions, roll back to previous revisions, and easily expose the application.
 Compared to configuring a basic Deployment, Service, and Ingress, Knative Serving provides much richer functionality with simpler configuration.
 
-For convenience, export the resource details to a file.
+For convenience, export the resource configuration and status details to a file.
 ```terminal:execute
-command: kubectl get kservice my-first-workload -o yaml > ~/exercises/my-first-workload-step-3-app.yaml
+command: kubectl get imgs my-first-workload -o yaml > ~/exercises/my-first-workload-step-3-app.yaml
 ```
 
-Open the file in the editor and look through the details.
+Open the file in the editor and look through the configuration portion.
 ```editor:open-file
 file: ~/exercises/my-first-workload-step-3-app.yaml
+text: "apiVersion: "
+before: 0
+after: 52
 ```
 
-Notice that the value of `.status.latestImage` from the Image resource was automatically provided as the source image for the Service resource.
+In the spec portion, notice that the value of `.status.latestImage` from the Image resource was automatically provided as the source image for the Service resource.
 ```editor:select-matching-text
 file: ~/exercises/my-first-workload-step-3-app.yaml
 text: "- image: "
