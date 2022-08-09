@@ -12,7 +12,7 @@ As a developer, you provide the values unique to your application, such as the g
 Use the tanzu CLI to deploy a workload to the platform. The `--tail` option will stream logs to the terminal window.
 ```terminal:execute
 command: |-
-    tanzu apps workload create app-{{session_namespace}} \
+    tanzu apps workload create app \
           --git-repo https://github.com/ciberkleid/hello-go.git \
           --git-branch main \
           --label app.kubernetes.io/part-of=my-first-workload \
@@ -26,7 +26,7 @@ Application Toolkit includes a basic workflow for web applications that will imm
 
 Click the following action to check the status of the workload in the second terminal window.
 ```terminal:execute
-command: tanzu apps workload get app-{{session_namespace}}
+command: tanzu apps workload get app
 session: 2
 ```
 
@@ -38,14 +38,14 @@ It takes a few moments to build the container image.
 In the meantime, in the first terminal window, you should see logging for the container build process.
 Wait until you see the following log entries:
 ```shell
-app-{{session_namespace}}-build-1-build-pod[completion] Build successful
-Workload "app-{{session_namespace}}" is ready
+app-build-1-build-pod[completion] Build successful
+Workload "app" is ready
 ```
 
 Re-run the "get" command.
 This time the status should be `type: eady, status: "True"` and you should see a URL for the application in the result.
 ```terminal:execute
-command: tanzu apps workload get app-{{session_namespace}}
+command: tanzu apps workload get app
 ```
 
 **Test Application**
@@ -53,7 +53,7 @@ command: tanzu apps workload get app-{{session_namespace}}
 Click on the URL in the output of the previous command to open the application in a separate browser tab, or execute the following command to test the application in the terminal window.
 
 ```terminal:execute
-command: curl http://app-{{session_namespace}}.default.{{ ingress_domain }}
+command: curl http://app.default.{{session_namespace}}.{{ingress_domain}}
 ```
 
 You should get a successful response back from the application.

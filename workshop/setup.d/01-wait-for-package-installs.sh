@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 # Wait for CRDs for kapp-controller to have been created.
 
 STATUS=1

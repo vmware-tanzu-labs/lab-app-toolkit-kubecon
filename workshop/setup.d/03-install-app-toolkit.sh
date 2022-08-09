@@ -1,15 +1,7 @@
 #!/bin/bash
 
 set -eo pipefail
-
-# Install kpack CLI.
-
-KP_VERSION=0.5.0
-
-if [[ $(which kp) == "" ]]; then
-  mkdir -p /home/eduk8s/bin
-  curl --fail -L -o /home/eduk8s/bin/kp https://github.com/vmware-tanzu/kpack-cli/releases/download/v$KP_VERSION/kp-linux-$KP_VERSION && chmod 755 /home/eduk8s/bin/kp
-fi
+set -x
 
 # Install App Toolkit and wait for main controllers to deploy.
 

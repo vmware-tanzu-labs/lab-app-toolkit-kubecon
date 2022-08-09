@@ -4,7 +4,7 @@ excluded_packages:
 knative_serving:
   domain:
     type: real
-    name: $INGRESS_DOMAIN
+    name: $SESSION_NAMESPACE.$INGRESS_DOMAIN
 
 kpack:
   kp_default_repository: $REGISTRY_HOST/kp
